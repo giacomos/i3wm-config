@@ -10,8 +10,12 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-exec sh ~/.fehbg &
-exec gnome-settings-daemon &
+#exec sh ~/.fehbg &
+#exec gnome-settings-daemon &
+
+for_window [class="Guake"] floating enable
+exec guake
+exec dropbox start
 
 # this let you toggle between different keyboard layouts
 exec setxkbmap -option grp:alt_shift_toggle us,it
@@ -24,6 +28,15 @@ exec setxkbmap -option grp:alt_shift_toggle us,it
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
 font pango:Ubuntu 10
+
+bindsym $mod+b exec nautilus --no-desktop &
+
+# next/previous workspace
+bindsym Mod1+Tab workspace next
+bindsym Mod1+Shift+Tab workspace prev
+bindsym $mod+Tab workspace back_and_forth
+workspace_auto_back_and_forth yes
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod

@@ -20,4 +20,6 @@ It's as simple as that:
 cd
 git clone https://github.com/ivyl/i3-config.git .i3
 ln -s .i3/i3status.conf ~/.i3status.conf
+ln -s .i3/xinitrc ~/.xinitrc
+ln -s .i3/xinitrc ~/.xsession
 ```
