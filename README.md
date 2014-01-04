@@ -23,3 +23,11 @@ ln -s .i3/i3status.conf ~/.i3status.conf
 ln -s .i3/xinitrc ~/.xinitrc
 ln -s .i3/xinitrc ~/.xsession
 ```
+
+Create a new file /usr/share/xsessions/custom.desktop with:
+```
+[Desktop Entry]
+Name=Xsession
+Exec=/etc/X11/Xsession
+```
+You should now have a new session option during login, Xsession will load the user's ~/.xsession file 

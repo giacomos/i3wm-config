@@ -10,15 +10,9 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-#exec sh ~/.fehbg &
-#exec gnome-settings-daemon &
 
 for_window [class="Guake"] floating enable
 exec guake
-exec dropbox start
-
-# this let you toggle between different keyboard layouts
-exec setxkbmap -option grp:alt_shift_toggle us,it
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -51,10 +45,10 @@ bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
 bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-'"
 bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
 
-bindsym XF86AudioPlay exec "~/.bin/player toggle"
-bindsym XF86AudioStop exec "~/.bin/player stop"
-bindsym XF86AudioNext exec "~/.bin/player next"
-bindsym XF86AudioPrev exec "~/.bin/player previous"
+#bindsym XF86AudioPlay exec "~/.bin/player toggle"
+#bindsym XF86AudioStop exec "~/.bin/player stop"
+#bindsym XF86AudioNext exec "~/.bin/player next"
+#bindsym XF86AudioPrev exec "~/.bin/player previous"
 
 bindsym $mod+F1 [class="Firefox"] move workspace current
 bindsym $mod+F2 [class="terminal"] move workspace current
@@ -192,16 +186,9 @@ mode "Move workspace: (L)eft, (Right)" {
 }
 bindsym $mod+m mode "Move workspace: (L)eft, (Right)"
 
-# change container layout (stacked, tabbed, toggle split)
-mode "Layout: (s)tacking, (w)tabbed, (e)toggle split" {
-        bindsym $mod+s layout stacking
-        bindsym $mod+w layout tabbed
-        bindsym $mod+e layout toggle split
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-bindsym $mod+w mode "Layout: (s)tacking, (w)tabbed, (e)toggle split"
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
