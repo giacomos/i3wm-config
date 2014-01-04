@@ -33,7 +33,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
-bindsym $mod+Ctrl+l exec i3lock -c 000000 -n -i /home/jack/Pictures/wallpaper.png -t
+bindsym $mod+Ctrl+l exec i3lock -n -ti /home/jack/Pictures/wallpaper.png
 bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
 bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-'"
 bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
@@ -130,17 +130,18 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 # Create Log out, Reboot, Poweroff bindings
-mode "Exit (L)ogout, (R)eboot, (P)oweroff" {
+mode "Exit (L)ogout, (R)eboot, (P)oweroff, (S)uspend" {
         bindsym $mod+r exec systemctl reboot
         bindsym $mod+l exit
         bindsym $mod+p exec systemctl poweroff
+        bindsym $mod+s exec ~/.i3/suspend.sh
          
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
  
-bindsym $mod+Shift+e mode "Exit (L)ogout, (R)eboot, (P)oweroff"
+bindsym $mod+Shift+e mode "Exit (L)ogout, (R)eboot, (P)oweroff, (S)uspend"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
