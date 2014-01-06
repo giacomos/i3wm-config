@@ -11,8 +11,15 @@
 
 set $mod Mod4
 
+#exec guake
+exec gnome-terminal
+exec pidgin
+
 for_window [class="Guake"] floating enable
-exec guake
+for_window [class="Firefox"] move workspace 1: www
+for_window [class="DownThemAll!"] move workspace 1: www
+for_window [title="Terminal"] move workspace 2: terminal
+for_window [class="Pidgin"] move workspace 3: chat
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -106,9 +113,9 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
+bindsym $mod+1 workspace 1: www
+bindsym $mod+2 workspace 2: terminal
+bindsym $mod+3 workspace 3: chat
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
