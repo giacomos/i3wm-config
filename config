@@ -11,15 +11,18 @@
 
 set $mod Mod4
 
-#exec guake
-exec gnome-terminal
-exec pidgin
 
 for_window [class="Guake"] floating enable
 for_window [class="Firefox"] move workspace 1: www
 for_window [class="DownThemAll!"] move workspace 1: www
+
+exec gnome-terminal
 for_window [title="Terminal"] move workspace 2: terminal
-for_window [class="Pidgin"] move workspace 3: chat
+#for_window [class="Pidgin"] move workspace 3: chat
+
+exec pidgin
+assign [class="Pidgin"] → 3: chat
+assign [class="Buddy List"] → 3: chat
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -59,6 +62,8 @@ bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
 
 bindsym $mod+F1 [class="Firefox"] move workspace current
 bindsym $mod+F2 [class="terminal"] move workspace current
+# Get me to the next open VIM instance
+bindsym $mod+Shift+V [class="terminal"] focus
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
@@ -66,6 +71,7 @@ bindsym $mod+F2 [class="terminal"] move workspace current
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
 
 # change focus
 bindsym $mod+j focus left
@@ -125,9 +131,9 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+1 move container to workspace 1: www
+bindsym $mod+Shift+2 move container to workspace 2: terminal
+bindsym $mod+Shift+3 move container to workspace 3: chat
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
@@ -213,3 +219,15 @@ bar {
             urgent_workspace   #ffffff #900000
         }
 }
+
+# Original windows decoration colors
+# class                 border  backgr. text    indicator
+#client.focused          #4c7899 #285577 #ffffff #2e9ef4
+#client.focused          #4c7899 #285577 #ffffff #2e9ef4
+#client.focused_inactive #333333 #5f676a #ffffff #484e50
+#client.unfocused        #333333 #222222 #888888 #292d2e
+#client.urgent           #2f343a #900000 #ffffff #900000
+client.focused          #4c7899 #24364F #ffffff #2e9ef4
+
+# This prevent the focus to follow mouse movements
+#focus_follows_mouse no
