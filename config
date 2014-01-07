@@ -28,6 +28,7 @@ assign [class="Buddy List"] → 3: chat
 
 bindsym $mod+F1 [class="Firefox"] move workspace current
 bindsym $mod+F2 [class="terminal"] move workspace current
+bindsym $mod+F3 [class="Thunderbird"] move workspace current
 # Get me to the next open VIM instance
 bindsym $mod+Shift+V [class="terminal"] focus
 
