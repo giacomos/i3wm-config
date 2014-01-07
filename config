@@ -18,11 +18,9 @@ for_window [class="Guake"] floating enable
 for_window [class="Firefox"] move workspace 1: www
 for_window [class="DownThemAll!"] move workspace 1: www
 
-exec gnome-terminal
 for_window [title="Terminal"] move workspace 2: terminal
 #for_window [class="Pidgin"] move workspace 3: chat
 
-exec pidgin
 assign [class="Pidgin"] → 3: chat
 assign [class="Buddy List"] → 3: chat
 
