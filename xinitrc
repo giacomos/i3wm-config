@@ -22,5 +22,6 @@ gnome-settings-daemon &
 gnome-volume-manager &
 
 # Launch i3 window manager
+xrandr --output DP1 --primary
 exec i3
 
