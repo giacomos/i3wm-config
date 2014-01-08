@@ -9,6 +9,7 @@
 * dmenu - Super-P launcher
 * pavucontrol - pulseaudio mixer
 * alsamixer
+* scrot - screenshots
 ### from xorg
 * setxkbmap - setting keyboard layout
 
