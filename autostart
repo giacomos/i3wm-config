@@ -1,8 +1,0 @@
-#!/bin/sh
-
-##networking applet
-nm-applet &
-
-gnome-terminal &
-
-pidgin &
