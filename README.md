@@ -10,6 +10,7 @@
 * pavucontrol - pulseaudio mixer
 * alsamixer
 * scrot - screenshots
+* conky - better sys informations
 ### from xorg
 * setxkbmap - setting keyboard layout
 

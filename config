@@ -226,7 +226,8 @@ bindsym $mod+Shift+s mode "$mode_external_pos"
 bar {
         tray_output primary
         position top
-        status_command i3status --config ~/.i3status.conf
+#        status_command i3status --config ~/.i3status.conf
+        status_command ~/.i3/conky-i3bar
 
         colors {
             background #24364F
@@ -247,7 +248,7 @@ bar {
 #client.unfocused        #333333 #222222 #888888 #292d2e
 #client.urgent           #2f343a #900000 #ffffff #900000
 client.unfocused          #4c7899 #24364F #aaaaaa #2e9ef4
-client.focused          #c10101 #880404 #ffffff #00ff00
+client.focused          #c10101 #880404 #ffffff #00AA00
 
 # This prevent the focus to follow mouse movements
 #focus_follows_mouse no
