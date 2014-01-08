@@ -11,6 +11,7 @@
 * alsamixer
 * scrot - screenshots
 * conky - better sys informations
+* jq - for parse weather info
 ### from xorg
 * setxkbmap - setting keyboard layout
 
