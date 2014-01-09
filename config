@@ -227,7 +227,7 @@ bar {
         tray_output primary
         position top
 #        status_command i3status --config ~/.i3status.conf
-        status_command ~/.i3/conky-i3bar
+        status_command ~/.i3/conky/conky-i3bar
 
         colors {
             background #24364F
