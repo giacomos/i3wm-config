@@ -10,6 +10,7 @@
 * pavucontrol - pulseaudio mixer
 * alsamixer
 * scrot - screenshots
+* acpi - for volume infos
 * conky - better sys informations
 * jq - for parse weather info
 ### from xorg
