@@ -8,6 +8,9 @@ set $mod Mod4
 exec --no-startup-id xrandr --output eDP1 --auto --left-of DP1
 exec --no-startup-id xrandr --output DP1 --primary
 
+set $i3_path /home/jack/.i3
+set $pictures_folder /home/jack/Pictures
+
 # Fancy names for workspaces
 set $w1 1: www
 set $w2 2: terminal
@@ -21,16 +24,16 @@ set $w9 9
 set $w10 10
 
 ## my custom binds
-bindsym $mod+Ctrl+l exec i3lock -c 000000 -i /home/jack/Pictures/wallpaper.png -t # && sudo pm-suspend
-#bindsym $mod+Ctrl+l exec --no-startup-id /home/jack/.i3/i3exit lock, mode "default"
+bindsym $mod+Ctrl+l exec i3lock -c 000000 -i $pictures_folder/wallpaper.png -t # && sudo pm-suspend
+#bindsym $mod+Ctrl+l exec --no-startup-id $i3_path/i3exit lock, mode "default"
 bindsym $mod+b exec nautilus --no-desktop &
 
 ## Assign section
-assign [class="^Firefox$"] → $w1
-assign [title="^DownThemAll$"] → $w1
-assign [title="^Print$"] → $w1
-assign [class="Pidgin"] → $w3
-assign [class="Buddy List"] → $w3
+assign [class="^Firefox$"]      → $w1
+assign [title="^DownThemAll$"]  → $w1
+assign [title="^Print$"]        → $w1
+assign [class="Pidgin"]         → $w3
+assign [class="Buddy List"]     → $w3
 
 #for_window [class="Guake"] floating enable
 for_window [window_role="pop-up"] floating enable
@@ -40,13 +43,13 @@ bindsym $mod+F1 [class="Firefox"] move workspace current
 bindsym $mod+F2 [class="terminal"] move workspace current
 bindsym $mod+F3 [class="Thunderbird"] move workspace current
 # Get me to the next open VIM instance
-bindsym $mod+Shift+V [class="terminal"] focus
+bindsym Ctrl+grave [class="terminal"] focus
 
 # Screen Shots
-bindsym Print exec scrot -e 'mv $f ~/Pictures/Scrot/$f'
-bindsym Mod1+Print exec scrot -u -e 'mv $f ~/Pictures/Scrot/$f'
-bindsym $mod+Print exec scrot -e 'mv $f ~/Pictures/Scrot/$f && gimp ~/Pictures/Scrot/$f'
-bindsym $mod+Mod1+Print exec scrot -u -e 'mv $f ~/Pictures/Scrot/$f && gimp ~/Pictures/Scrot/$f'
+bindsym Print exec scrot -e 'mv $f $pictures_folder/Scrot/$f'
+bindsym Mod1+Print exec scrot -u -e 'mv $f $pictures_folder/Scrot/$f'
+bindsym $mod+Print exec scrot -e 'mv $f $pictures_folder/Scrot/$f && gimp $pictures_folder/Scrot/$f'
+bindsym $mod+Mod1+Print exec scrot -u -e 'mv $f $pictures_folder/Scrot/$f && gimp $pictures_folder/Scrot/$f'
 
 # move workspace to outputs
 bindsym $mod+Mod1+Left move workspace to output left
@@ -83,7 +86,7 @@ floating_modifier $mod
 
 # kill focused window
 bindsym $mod+Shift+q kill
-#bindsym $mod+Ctrl+l exec i3lock -n -ti /home/jack/Pictures/wallpaper.png
+#bindsym $mod+Ctrl+l exec i3lock -n -ti $pictures_folder/wallpaper.png
 bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
 bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-'"
 bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
@@ -149,25 +152,25 @@ bindsym $mod+a focus parent
 bindsym $mod+1 workspace $w1
 bindsym $mod+2 workspace $w2
 bindsym $mod+3 workspace $w3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+4 workspace $w4
+bindsym $mod+5 workspace $w5
+bindsym $mod+6 workspace $w6
+bindsym $mod+7 workspace $w7
+bindsym $mod+8 workspace $w8
+bindsym $mod+9 workspace $w9
+bindsym $mod+0 workspace $w10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $w1
 bindsym $mod+Shift+2 move container to workspace $w2
 bindsym $mod+Shift+3 move container to workspace $w3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+4 move container to workspace $w4
+bindsym $mod+Shift+5 move container to workspace $w5
+bindsym $mod+Shift+6 move container to workspace $w6
+bindsym $mod+Shift+7 move container to workspace $w7
+bindsym $mod+Shift+8 move container to workspace $w8
+bindsym $mod+Shift+9 move container to workspace $w9
+bindsym $mod+Shift+0 move container to workspace $w10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -180,12 +183,12 @@ bindsym $mod+Shift+r restart
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id /home/jack/.i3/i3exit lock, mode "default"
-    bindsym e exec --no-startup-id /home/jack/.i3/i3exit logout, mode "default"
-    bindsym s exec --no-startup-id /home/jack/.i3/i3exit suspend, mode "default"
-    bindsym h exec --no-startup-id /home/jack/.i3/i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id /home/jack/.i3/i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id /home/jack/.i3/i3exit shutdown, mode "default"
+    bindsym l exec --no-startup-id $i3_path/i3exit lock, mode "default"
+    bindsym e exec --no-startup-id $i3_path/i3exit logout, mode "default"
+    bindsym s exec --no-startup-id $i3_path/i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id $i3_path/i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id $i3_path/i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id $i3_path/i3exit shutdown, mode "default"
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
