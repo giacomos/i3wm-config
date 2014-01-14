@@ -15,7 +15,7 @@ set $pictures_folder /home/jack/Pictures
 set $w1 1: www
 set $w2 2: terminal
 set $w3 3: chat
-set $w4 4
+set $w4 4: mail
 set $w5 5
 set $w6 6
 set $w7 7
@@ -34,6 +34,7 @@ assign [title="^DownThemAll$"]  → $w1
 assign [title="^Print$"]        → $w1
 assign [class="Pidgin"]         → $w3
 assign [class="Buddy List"]     → $w3
+assign [class="Thunderbird"]    → $w4
 
 #for_window [class="Guake"] floating enable
 for_window [window_role="pop-up"] floating enable
@@ -280,6 +281,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id gnome-terminal
 exec --no-startup-id pidgin
 exec --no-startup-id gnome-settings-daemon
+exec --no-startup-id thunderbird
 exec dropbox start
 exec pulseaudio --start
 
