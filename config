@@ -34,11 +34,12 @@ assign [title="^DownThemAll$"]  → $w1
 assign [title="^Print$"]        → $w1
 assign [class="Pidgin"]         → $w3
 assign [class="Buddy List"]     → $w3
-assign [class="Thunderbird"]    → $w4
+assign [class="^Thunderbird$"]  → $w4
 
 #for_window [class="Guake"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [title="Calculator"] floating enable
+#for_window [class="^Thunderbird$"] move workspace $w4
 
 # summon most used apps
 bindsym $mod+F1 [class="Firefox"]       move workspace current
