@@ -279,6 +279,7 @@ client.focused          #c10101 #880404 #ffffff #00AA00
 ## Autostart section
 exec --no-startup-id firefox
 exec --no-startup-id nm-applet
+exec --no-startup-id gnome-sound-applet
 exec --no-startup-id gnome-terminal
 exec --no-startup-id pidgin
 exec --no-startup-id gnome-settings-daemon
