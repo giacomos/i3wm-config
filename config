@@ -8,22 +8,37 @@ set $mod Mod4
 exec --no-startup-id xrandr --output eDP1 --auto --left-of DP1
 exec --no-startup-id xrandr --output DP1 --primary
 
+# Fancy names for workspaces
+set $w1 1: www
+set $w2 2: terminal
+set $w3 3: chat
+set $w4 4
+set $w5 5
+set $w6 6
+set $w7 7
+set $w8 8
+set $w9 9
+set $w10 10
+
 ## my custom binds
 bindsym $mod+Ctrl+l exec i3lock -c 000000 -i /home/jack/Pictures/wallpaper.png -t # && sudo pm-suspend
 #bindsym $mod+Ctrl+l exec --no-startup-id /home/jack/.i3/i3exit lock, mode "default"
 bindsym $mod+b exec nautilus --no-desktop &
 
 ## Assign section
-assign [class="Firefox"] → 1: www
-assign [class="DTA"] → 1: www
-assign [class="Pidgin"] → 3: chat
-assign [class="Buddy List"] → 3: chat
+assign [class="Firefox"] → $w1
+assign [class="DTA"] → $w1
+assign [class="Pidgin"] → $w3
+assign [class="Buddy List"] → $w3
 
 #for_window [class="Guake"] floating enable
-for_window [class="Firefox"] move workspace 1: www
-for_window [class="DTA"] move workspace 1: www
-for_window [title="Terminal"] move workspace 2: terminal
-for_window [class="Pidgin"] move workspace 3: chat
+for_window [window_role="pop-up"] floating enable
+for_window [title="Calculator"] floating enable
+for_window [class="Firefox"] move workspace $w1
+for_window [class="DTA"] move workspace $w1
+for_window [title="DownThemAll"] move workspace $w1
+for_window [title="Terminal"] move workspace $w2
+for_window [class="Pidgin"] move workspace $w3
 for_window [title="Buddy List"] floating disable; move right; resize shrink right 31px or 31 ppt
 
 bindsym $mod+F1 [class="Firefox"] move workspace current
@@ -38,8 +53,17 @@ bindsym Mod1+Print exec scrot -u -e 'mv $f ~/Pictures/Scrot/$f'
 bindsym $mod+Print exec scrot -e 'mv $f ~/Pictures/Scrot/$f && gimp ~/Pictures/Scrot/$f'
 bindsym $mod+Mod1+Print exec scrot -u -e 'mv $f ~/Pictures/Scrot/$f && gimp ~/Pictures/Scrot/$f'
 
+# move workspace to outputs
+bindsym $mod+Mod1+Left move workspace to output left
+bindsym $mod+Mod1+Down move workspace to output down
+bindsym $mod+Mod1+Up move workspace to output up
+bindsym $mod+Mod1+Right move workspace to output right
+
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+
+# rename workspace
+bindsym $mod+Shift+y exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -127,9 +151,9 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1: www
-bindsym $mod+2 workspace 2: terminal
-bindsym $mod+3 workspace 3: chat
+bindsym $mod+1 workspace $w1
+bindsym $mod+2 workspace $w2
+bindsym $mod+3 workspace $w3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
@@ -139,9 +163,9 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1: www
-bindsym $mod+Shift+2 move container to workspace 2: terminal
-bindsym $mod+Shift+3 move container to workspace 3: chat
+bindsym $mod+Shift+1 move container to workspace $w1
+bindsym $mod+Shift+2 move container to workspace $w2
+bindsym $mod+Shift+3 move container to workspace $w3
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
@@ -264,7 +288,7 @@ exec pulseaudio --start
 
 ## Workspaces
 workspace_auto_back_and_forth yes
-workspace "1: www" output DP1
-workspace "2: terminal" output DP1
-workspace "3: chat" output eDP1
+workspace "$w1" output DP1
+workspace "$w2" output DP1
+workspace "$w3" output eDP1
 
