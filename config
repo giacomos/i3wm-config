@@ -39,9 +39,11 @@ assign [class="Buddy List"]     → $w3
 for_window [window_role="pop-up"] floating enable
 for_window [title="Calculator"] floating enable
 
-bindsym $mod+F1 [class="Firefox"] move workspace current
-bindsym $mod+F2 [class="terminal"] move workspace current
-bindsym $mod+F3 [class="Thunderbird"] move workspace current
+# summon most used apps
+bindsym $mod+F1 [class="Firefox"]       move workspace current
+bindsym $mod+F2 [class="terminal"]      move workspace current
+bindsym $mod+F3 [class="Thunderbird"]   move workspace current
+
 # Get me to the next open VIM instance
 bindsym Ctrl+grave [class="terminal"] focus
 
@@ -52,9 +54,9 @@ bindsym $mod+Print exec scrot -e 'mv $f $pictures_folder/Scrot/$f && gimp $pictu
 bindsym $mod+Mod1+Print exec scrot -u -e 'mv $f $pictures_folder/Scrot/$f && gimp $pictures_folder/Scrot/$f'
 
 # move workspace to outputs
-bindsym $mod+Mod1+Left move workspace to output left
-bindsym $mod+Mod1+Down move workspace to output down
-bindsym $mod+Mod1+Up move workspace to output up
+bindsym $mod+Mod1+Left  move workspace to output left
+bindsym $mod+Mod1+Down  move workspace to output down
+bindsym $mod+Mod1+Up    move workspace to output up
 bindsym $mod+Mod1+Right move workspace to output right
 
 # start a terminal
@@ -224,7 +226,6 @@ set $mode_move Move workspace: (L)eft, (Right)
 mode "$mode_move" {
         bindsym l move workspace to output left
         bindsym r move workspace to output right
-         
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -235,8 +236,6 @@ set $mode_external_pos External screen is on (l)eft or (r)ight of the internal o
 mode "$mode_external_pos" {
         bindsym r exec xrandr --output DP1 --mode 1920x1080 --right-of eDP1
         bindsym l exec xrandr --output DP1 --mode 1920x1080 --left-of eDP1
-
-         
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -289,4 +288,3 @@ workspace_auto_back_and_forth yes
 workspace "$w1" output DP1
 workspace "$w2" output DP1
 workspace "$w3" output eDP1
-
