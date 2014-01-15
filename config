@@ -39,7 +39,10 @@ assign [class="^Thunderbird$"]  → $w3
 #for_window [class="Guake"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [title="Calculator"] floating enable
+for_window [title="Calculator"] border 1pixel
+for_window [class="terminal"] border 1pixel
 #for_window [class="^Thunderbird$"] move workspace $w4
+for_window [title="Pidgin"] move left; resize shrink right 31px or 31 ppt
 
 # summon most used apps
 bindsym $mod+F1 [class="Firefox"]       move workspace current
@@ -47,7 +50,13 @@ bindsym $mod+F2 [class="terminal"]      move workspace current
 bindsym $mod+F3 [class="Thunderbird"]   move workspace current
 
 # Get me to the next open VIM instance
-bindsym Ctrl+grave [class="terminal"] focus
+#bindsym Ctrl+grave [class="terminal"] focus
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym Ctrl+grave scratchpad show
 
 # Screen Shots
 bindsym Print exec scrot -e 'mv $f $pictures_folder/Scrot/$f'
