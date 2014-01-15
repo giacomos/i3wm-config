@@ -113,8 +113,8 @@ bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
 #bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# installebindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="/usr/bin/dmenu -l 5 -fn 'xft:Terminus:pixelsize=8' -nb '#191919' -nf '#9ac0cd' -sb '#191919' -sf '#bf3f34' -p 'search app >> '"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="/usr/bin/dmenu -b -fn 'xft:Terminus:pixelsize=8' -nb '#191919' -nf '#9ac0cd' -sb '#191919' -sf '#bf3f34' -p 'search app >> '"
 
 # change focus
 bindsym $mod+j focus left
