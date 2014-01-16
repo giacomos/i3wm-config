@@ -1,0 +1,292 @@
+# vim:filetype=i3
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod4
+
+set $i3_path /home/jack/.i3
+set $pictures_folder /home/jack/Pictures
+
+# Fancy names for workspaces
+set $w1 1: www
+set $w2 2: terminal
+set $w3 3: chat&mail
+set $w4 4
+set $w5 5
+set $w6 6
+set $w7 7
+set $w8 8
+set $w9 9
+set $w10 10
+
+## my custom binds
+bindsym $mod+Ctrl+l exec i3lock -c 000000 -i $pictures_folder/wallpaper.png -t # && sudo pm-suspend
+#bindsym $mod+Ctrl+l exec --no-startup-id $i3_path/i3exit lock, mode "default"
+bindsym $mod+b exec nautilus --no-desktop &
+
+## Assign section
+assign [class="^Firefox$"]      → $w1
+assign [title="^DownThemAll$"]  → $w1
+assign [title="^Print$"]        → $w1
+assign [class="Pidgin"]         → $w3
+assign [class="Buddy List"]     → $w3
+assign [class="^Thunderbird$"]  → $w3
+
+#for_window [class="Guake"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [title="Calculator"] floating enable
+for_window [title="Calculator"] border 1pixel
+for_window [class="terminal"] border 1pixel
+#for_window [class="^Thunderbird$"] move workspace $w4
+for_window [title="Pidgin"] move left; resize shrink right 31px or 31 ppt
+
+# summon most used apps
+bindsym $mod+F1 [class="Firefox"]       move workspace current
+bindsym $mod+F2 [class="terminal"]      move workspace current
+bindsym $mod+F3 [class="Thunderbird"]   move workspace current
+
+# Get me to the next open VIM instance
+#bindsym Ctrl+grave [class="terminal"] focus
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym Ctrl+grave scratchpad show
+
+# Screen Shots
+bindsym Print exec scrot -e 'mv $f $pictures_folder/Scrot/$f'
+bindsym Mod1+Print exec scrot -u -e 'mv $f $pictures_folder/Scrot/$f'
+bindsym $mod+Print exec scrot -e 'mv $f $pictures_folder/Scrot/$f && gimp $pictures_folder/Scrot/$f'
+bindsym $mod+Mod1+Print exec scrot -u -e 'mv $f $pictures_folder/Scrot/$f && gimp $pictures_folder/Scrot/$f'
+
+# move workspace to outputs
+bindsym $mod+Mod1+Left  move workspace to output left
+bindsym $mod+Mod1+Down  move workspace to output down
+bindsym $mod+Mod1+Up    move workspace to output up
+bindsym $mod+Mod1+Right move workspace to output right
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# rename workspace
+bindsym $mod+Shift+y exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below. ISO 10646 = Unicode
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, if you need a lot of unicode glyphs or
+# right-to-left text rendering, you should instead use pango for rendering and
+# chose a FreeType font, such as:
+font pango:Ubuntu 10
+
+# next/previous workspace
+bindsym Mod1+Tab workspace next
+bindsym Mod1+Shift+Tab workspace prev
+bindsym $mod+Tab workspace back_and_forth
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# kill focused window
+bindsym $mod+Shift+q kill
+#bindsym $mod+Ctrl+l exec i3lock -n -ti $pictures_folder/wallpaper.png
+bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
+bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-'"
+bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
+
+#bindsym XF86AudioPlay exec "~/.bin/player toggle"
+#bindsym XF86AudioStop exec "~/.bin/player stop"
+#bindsym XF86AudioNext exec "~/.bin/player next"
+#bindsym XF86AudioPrev exec "~/.bin/player previous"
+
+# start dmenu (a program launcher)
+#bindsym $mod+d exec dmenu_run
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installebindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="/usr/bin/dmenu -l 5 -fn 'xft:Terminus:pixelsize=8' -nb '#191919' -nf '#9ac0cd' -sb '#191919' -sf '#bf3f34' -p 'search app >> '"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="/usr/bin/dmenu -b -fn 'xft:Terminus:pixelsize=8' -nb '#191919' -nf '#9ac0cd' -sb '#191919' -sf '#bf3f34' -p 'search app >> '"
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+ograve focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+ograve move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace $w1
+bindsym $mod+2 workspace $w2
+bindsym $mod+3 workspace $w3
+bindsym $mod+4 workspace $w4
+bindsym $mod+5 workspace $w5
+bindsym $mod+6 workspace $w6
+bindsym $mod+7 workspace $w7
+bindsym $mod+8 workspace $w8
+bindsym $mod+9 workspace $w9
+bindsym $mod+0 workspace $w10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $w1
+bindsym $mod+Shift+2 move container to workspace $w2
+bindsym $mod+Shift+3 move container to workspace $w3
+bindsym $mod+Shift+4 move container to workspace $w4
+bindsym $mod+Shift+5 move container to workspace $w5
+bindsym $mod+Shift+6 move container to workspace $w6
+bindsym $mod+Shift+7 move container to workspace $w7
+bindsym $mod+Shift+8 move container to workspace $w8
+bindsym $mod+Shift+9 move container to workspace $w9
+bindsym $mod+Shift+0 move container to workspace $w10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# Create Log out, Reboot, Poweroff bindings
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $i3_path/i3exit lock, mode "default"
+    bindsym e exec --no-startup-id $i3_path/i3exit logout, mode "default"
+    bindsym s exec --no-startup-id $i3_path/i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id $i3_path/i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id $i3_path/i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id $i3_path/i3exit shutdown, mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+e mode "$mode_system"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym ograve resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+set $mode_move Move workspace: (L)eft, (Right)
+mode "$mode_move" {
+        bindsym l move workspace to output left
+        bindsym r move workspace to output right
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+m mode "$mode_move"
+
+set $mode_external_pos External screen is on (l)eft or (r)ight of the internal one?
+mode "$mode_external_pos" {
+        bindsym r exec xrandr --output DP1 --mode 1920x1080 --right-of eDP1
+        bindsym l exec xrandr --output DP1 --mode 1920x1080 --left-of eDP1
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+Shift+s mode "$mode_external_pos"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        tray_output primary
+        position top
+#        status_command i3status --config ~/.i3status.conf
+        status_command ~/.i3/conky/conky-i3bar
+
+        colors {
+            background #24364F
+            statusline #CCCCCC
+
+            focused_workspace  #ffffff #285577
+            active_workspace   #cccccc #333333
+            inactive_workspace #333333 #222222
+            urgent_workspace   #ffffff #900000
+        }
+}
+
+# Original windows decoration colors
+# class                 border  backgr. text    indicator
+#client.focused          #4c7899 #285577 #ffffff #2e9ef4
+#client.focused          #4c7899 #285577 #ffffff #2e9ef4
+#client.focused_inactive #333333 #5f676a #ffffff #484e50
+#client.unfocused        #333333 #222222 #888888 #292d2e
+#client.urgent           #2f343a #900000 #ffffff #900000
+client.unfocused          #4c7899 #24364F #aaaaaa #2e9ef4
+client.focused          #c10101 #880404 #ffffff #00AA00
+
+# This prevent the focus to follow mouse movements
+#focus_follows_mouse no
+
+## Autostart section
+exec --no-startup-id firefox
+exec --no-startup-id nm-applet
+exec --no-startup-id gnome-sound-applet
+exec --no-startup-id gnome-terminal
+exec --no-startup-id gnome-settings-daemon
+exec --no-startup-id thunderbird
+exec dropbox start
+exec pulseaudio --start
