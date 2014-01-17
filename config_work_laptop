@@ -27,6 +27,7 @@ set $w10 10
 bindsym $mod+Ctrl+l exec i3lock -c 000000 -i $pictures_folder/wallpaper.png -t # && sudo pm-suspend
 #bindsym $mod+Ctrl+l exec --no-startup-id $i3_path/i3exit lock, mode "default"
 bindsym $mod+b exec nautilus --no-desktop &
+bindsym $mod+Shift+B exec i3-input -F 'exec ~/.i3/conky/brightnesslevel.sh set %s' -P 'Set brightness to: '
 
 ## Assign section
 assign [class="^Firefox$"]      → $w1
@@ -38,6 +39,7 @@ assign [class="^Thunderbird$"]  → $w3
 
 #for_window [class="Guake"] floating enable
 for_window [window_role="pop-up"] floating enable
+for_window [class="^Skype$"] floating enable
 for_window [title="Calculator"] floating enable
 for_window [title="Calculator"] border 1pixel
 for_window [class="terminal"] border 1pixel
