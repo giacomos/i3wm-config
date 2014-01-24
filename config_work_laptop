@@ -42,7 +42,7 @@ for_window [window_role="pop-up"] floating enable
 for_window [class="^Skype$"] floating enable
 for_window [title="Calculator"] floating enable
 for_window [title="Calculator"] border 1pixel
-for_window [class="terminal"] border 1pixel
+#for_window [class="terminal"] border 1pixel
 #for_window [class="^Thunderbird$"] move workspace $w4
 for_window [title="Pidgin"] move left; resize shrink right 31px or 31 ppt
 
