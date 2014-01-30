@@ -13,6 +13,7 @@
 * acpi - for volume infos
 * conky - better sys informations
 * jq - for parse weather info
+* bc - for calculating current brightness level
 ### from xorg
 * setxkbmap - setting keyboard layout
 
