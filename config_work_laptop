@@ -189,6 +189,8 @@ bindsym $mod+Shift+8 move container to workspace $w8
 bindsym $mod+Shift+9 move container to workspace $w9
 bindsym $mod+Shift+0 move container to workspace $w10
 
+bindsym $mod+Shift+M exec i3-input -F 'move container to workspace "%s"' -P 'move this window to workspace #: '
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -271,7 +273,7 @@ bar {
 
             focused_workspace  #ffffff #285577
             active_workspace   #cccccc #333333
-            inactive_workspace #333333 #222222
+            inactive_workspace #999999 #222222
             urgent_workspace   #ffffff #900000
         }
 }
