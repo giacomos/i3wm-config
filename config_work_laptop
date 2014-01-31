@@ -28,7 +28,7 @@ bindsym $mod+Ctrl+l exec i3lock -c 000000 -i $pictures_folder/wallpaper.png -t #
 #bindsym $mod+Ctrl+l exec --no-startup-id $i3_path/i3exit lock, mode "default"
 bindsym $mod+b exec nautilus --no-desktop &
 bindsym $mod+Shift+B exec i3-input -F 'exec ~/.i3/conky/brightnesslevel.sh set %s' -P 'Set brightness to: '
-bindsym $mod+Shift+L exec i3-input -F 'exec setxkbmap %s' -P 'Set keyboard layout to: '
+bindsym Mod1+Shift+K exec i3-input -F 'exec setxkbmap %s' -P 'Set keyboard layout to: '
 
 ## Assign section
 assign [class="^Firefox$"]      → $w1
