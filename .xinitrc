@@ -13,6 +13,9 @@
 setxkbmap -option grp:alt_shift_toggle us,it
 sh ./.fehbg &
 
+
+# Start a D-Bus session
+source /etc/X11/xinit/xinitrc.d/30-dbus
 # Start GNOME Keyring
 eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
