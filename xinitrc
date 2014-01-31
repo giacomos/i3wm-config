@@ -7,7 +7,7 @@
 #  unset f
 #fi
 #
-#[[ -f ~/.Xresources ]] && xrdb -merge "${HOME}/.Xresources"
+[[ -f ~/.Xresources ]] && xrdb -merge "${HOME}/.Xresources"
 
 # this let you toggle between different keyboard layouts
 setxkbmap -option grp:alt_shift_toggle us,it
