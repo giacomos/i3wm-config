@@ -22,11 +22,12 @@
 It's as simple as that:
 
 ```bash
-cd
+cd ~
 git clone https://github.com/ivyl/i3-config.git .i3
 ln -s .i3/i3status.conf ~/.i3status.conf
 ln -s .i3/xinitrc ~/.xinitrc
 ln -s .i3/xinitrc ~/.xsession
+ln -s config_work_laptop config
 ```
 
 Create a new file /usr/share/xsessions/custom.desktop with:
