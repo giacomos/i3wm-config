@@ -250,15 +250,29 @@ mode "$mode_move" {
 }
 bindsym $mod+m mode "$mode_move"
 
+set $EXTMON DP1
+set $INTMON eDP1
 set $mode_external_pos External screen is on (l)eft or (r)ight of the internal one?
 mode "$mode_external_pos" {
-        bindsym r exec xrandr --output DP1 --mode 1920x1080 --right-of eDP1
-        bindsym l exec xrandr --output DP1 --mode 1920x1080 --left-of eDP1
+        bindsym r exec xrandr --output $EXTMON --mode 1920x1080 --right-of $INTMON
+        bindsym l exec xrandr --output $EXTMON --mode 1920x1080 --left-of $INTMON
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 bindsym $mod+Shift+s mode "$mode_external_pos"
+
+set $mode_screen Multi-monitor setup: (e)xternal only, (i)nternal only, (c)lone, (s)eparated
+mode "$mode_screen" {
+    bindsym c exec --no-startup-id xrandr --output $EXTMON --auto --output $INTMON --auto
+    bindsym e exec --no-startup-id xrandr --output $EXTMON --auto --output $INTMON --off
+    bindsym i exec --no-startup-id xrandr --output $INTMON --auto --output $EXTMON --off
+    bindsym s exec --no-startup-id xrandr --output $INTMON --auto && xrandr --output $EXTMON --right-of $INTMON
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Mod1+m mode "$mode_screen"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
