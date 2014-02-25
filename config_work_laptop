@@ -12,10 +12,10 @@ set $i3_path /home/jack/.i3
 set $pictures_folder /home/jack/Pictures
 
 # Fancy names for workspaces
-set $w1 1: www
-set $w2 2: terminal
-set $w3 3: mail
-set $w4 4: chat
+set $w1 1: WWW
+set $w2 2: TERM
+set $w3 3: MAIL
+set $w4 4: CHAT
 set $w5 5
 set $w6 6
 set $w7 7
@@ -42,6 +42,7 @@ assign [class="Buddy List"]     → $w4
 #for_window [class="Guake"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [class="^Skype$"] floating enable
+for_window [class="notify"] floating enable border 1pixel
 for_window [title="Calculator"] floating enable
 for_window [title="Calculator"] border 1pixel
 #for_window [class="terminal"] border 1pixel
@@ -253,10 +254,12 @@ bindsym $mod+m mode "$mode_move"
 
 set $EXTMON DP1
 set $INTMON eDP1
-set $mode_external_pos External screen is on (l)eft or (r)ight of the internal one?
+set $mode_external_pos External screen is: ↑, →, ↓, ←
 mode "$mode_external_pos" {
-        bindsym r exec xrandr --output $EXTMON --mode 1920x1080 --right-of $INTMON
-        bindsym l exec xrandr --output $EXTMON --mode 1920x1080 --left-of $INTMON
+        bindsym Left exec xrandr --output $EXTMON --mode 1920x1080 --left-of $INTMON
+        bindsym Right exec xrandr --output $EXTMON --mode 1920x1080 --right-of $INTMON
+        bindsym Up exec xrandr --output $EXTMON --mode 1920x1080 --above $INTMON
+        bindsym Down exec xrandr --output $EXTMON --mode 1920x1080 --below $INTMON
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"

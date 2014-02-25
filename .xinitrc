@@ -29,6 +29,7 @@ export LANGUAGE="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export TERMINAL='gnome-terminal'
 
+# exec xrandr --output DP1 --primary
 # Launch i3 window manager
 exec i3
 
