@@ -16,7 +16,7 @@ set $w1 1: WWW
 set $w2 2: TERM
 set $w3 3: MAIL
 set $w4 4: CHAT
-set $w5 5
+set $w5 5: FILE
 set $w6 6
 set $w7 7
 set $w8 8
@@ -36,8 +36,8 @@ assign [title="^DownThemAll$"]  → $w1
 assign [title="^Print$"]        → $w1
 assign [class="terminal"]       → $w2
 assign [class="^Thunderbird$"]  → $w3
-assign [class="Pidgin"]         → $w4
 assign [class="Buddy List"]     → $w4
+assign [class="^Nautilus$"]     → $w5
 
 #for_window [class="Guake"] floating enable
 for_window [window_role="pop-up"] floating enable
