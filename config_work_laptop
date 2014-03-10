@@ -11,6 +11,9 @@ exec --no-startup-id xrandr --output DP1 --primary
 set $i3_path /home/jack/.i3
 set $pictures_folder /home/jack/Pictures
 
+set $OUTPUT_E DP1
+set $OUTPUT_I eDP1
+
 # Fancy names for workspaces
 set $w1 1: WWW
 set $w2 2: TERM
@@ -68,12 +71,6 @@ bindsym Print exec scrot -e 'mv $f $pictures_folder/Scrot/$f'
 bindsym Mod1+Print exec scrot -u -e 'mv $f $pictures_folder/Scrot/$f'
 bindsym $mod+Print exec scrot -e 'mv $f $pictures_folder/Scrot/$f && gimp $pictures_folder/Scrot/$f'
 bindsym $mod+Mod1+Print exec scrot -u -e 'mv $f $pictures_folder/Scrot/$f && gimp $pictures_folder/Scrot/$f'
-
-# move workspace to outputs
-bindsym $mod+Mod1+Left  move workspace to output left
-bindsym $mod+Mod1+Down  move workspace to output down
-bindsym $mod+Mod1+Up    move workspace to output up
-bindsym $mod+Mod1+Right move workspace to output right
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -242,24 +239,24 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-set $mode_move Move workspace: (L)eft, (Right)
+set $mode_move Move workspace to output: ↑, →, ↓, ←
 mode "$mode_move" {
-        bindsym l move workspace to output left
-        bindsym r move workspace to output right
+        bindsym Left    move workspace to output left
+        bindsym Right   move workspace to output right
+        bindsym Up      move workspace to output up
+        bindsym Down    move workspace to output down
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 bindsym $mod+m mode "$mode_move"
 
-set $EXTMON DP1
-set $INTMON eDP1
-set $mode_external_pos External screen is: ↑, →, ↓, ←
+set $mode_external_pos External screen position: ↑, →, ↓, ←
 mode "$mode_external_pos" {
-        bindsym Left exec xrandr --output $EXTMON --mode 1920x1080 --left-of $INTMON
-        bindsym Right exec xrandr --output $EXTMON --mode 1920x1080 --right-of $INTMON
-        bindsym Up exec xrandr --output $EXTMON --mode 1920x1080 --above $INTMON
-        bindsym Down exec xrandr --output $EXTMON --mode 1920x1080 --below $INTMON
+        bindsym Left    exec xrandr --output $OUTPUT_E --mode 1920x1080 --left-of $OUTPUT_I
+        bindsym Right   exec xrandr --output $OUTPUT_E --mode 1920x1080 --right-of $OUTPUT_I
+        bindsym Up      exec xrandr --output $OUTPUT_E --mode 1920x1080 --above $OUTPUT_I
+        bindsym Down    exec xrandr --output $OUTPUT_E --mode 1920x1080 --below $OUTPUT_I
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -268,10 +265,10 @@ bindsym $mod+Shift+s mode "$mode_external_pos"
 
 set $mode_screen Multi-monitor setup: (e)xternal only, (i)nternal only, (c)lone, (s)eparated
 mode "$mode_screen" {
-    bindsym c exec --no-startup-id xrandr --output $EXTMON --auto --output $INTMON --auto
-    bindsym e exec --no-startup-id xrandr --output $EXTMON --auto --output $INTMON --off
-    bindsym i exec --no-startup-id xrandr --output $INTMON --auto --output $EXTMON --off
-    bindsym s exec --no-startup-id xrandr --output $INTMON --auto && xrandr --output $EXTMON --right-of $INTMON
+    bindsym c exec --no-startup-id xrandr --output $OUTPUT_E --auto --output $OUTPUT_I --auto
+    bindsym e exec --no-startup-id xrandr --output $OUTPUT_E --auto --output $OUTPUT_I --off
+    bindsym i exec --no-startup-id xrandr --output $OUTPUT_I --auto --output $OUTPUT_E --off
+    bindsym s exec --no-startup-id xrandr --output $OUTPUT_I --auto && xrandr --output $OUTPUT_E --right-of $OUTPUT_I
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -323,7 +320,7 @@ exec pulseaudio --start
 
 ## Workspaces
 #workspace_auto_back_and_forth yes
-workspace "$w1" output DP1
-workspace "$w2" output DP1
-workspace "$w3" output DP1
-workspace "$w4" output eDP1
+workspace "$w1" output $OUTPUT_E
+workspace "$w2" output $OUTPUT_E
+workspace "$w3" output $OUTPUT_E
+workspace "$w4" output $OUTPUT_I
