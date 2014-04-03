@@ -309,6 +309,7 @@ client.focused          #c10101 #880404 #ffffff #00AA00
 #focus_follows_mouse no
 
 ## Autostart section
+exec ~/.i3/conky/brightnesslevel.sh set 30
 exec --no-startup-id firefox
 exec --no-startup-id nm-applet
 exec --no-startup-id gnome-sound-applet
