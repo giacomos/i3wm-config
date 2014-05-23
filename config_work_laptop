@@ -49,6 +49,7 @@ for_window [class="^Skype$"] floating enable
 for_window [class="notify"] floating enable border 1pixel
 for_window [title="Calculator"] floating enable
 for_window [title="Calculator"] border 1pixel
+for_window [title="synapse"] floating enable border 1pixel
 #for_window [class="terminal"] border 1pixel
 #for_window [class="^Thunderbird$"] move workspace $w4
 for_window [title="Pidgin"] move left; resize shrink right 31px or 31 ppt
@@ -317,6 +318,7 @@ exec --no-startup-id gnome-terminal
 exec --no-startup-id pidgin
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id thunderbird
+exec --no-startup-id synapse
 exec dropbox start
 exec pulseaudio --start
 
