@@ -320,6 +320,7 @@ exec --no-startup-id gnome-terminal
 exec --no-startup-id pidgin
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id geary
+exec --no-startup-id sflphone-client-gnome
 exec --no-startup-id kupfer
 exec dropbox start
 exec pulseaudio --start
