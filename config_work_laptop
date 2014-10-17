@@ -50,6 +50,7 @@ assign [class="^Nautilus$"]     → $w5
 for_window [window_role="pop-up"] floating enable
 for_window [class="^Skype$"] floating enable
 for_window [class="notify"] floating enable border 1pixel
+for_window [title="GADMIN"] floating enable
 for_window [title="Calculator"] floating enable
 for_window [title="Calculator"] border 1pixel
 for_window [title="Kupfer"] floating enable border 1pixel
@@ -320,11 +321,13 @@ exec --no-startup-id gnome-sound-applet
 exec --no-startup-id gnome-terminal
 exec --no-startup-id pidgin
 exec --no-startup-id gnome-settings-daemon
-exec --no-startup-id geary
-exec --no-startup-id sflphone-client-gnome
+exec --no-startup-id thunderbird
+#exec --no-startup-id sflphone-client-gnome
 exec --no-startup-id kupfer
+exec --no-startup-id /opt/thefanclub/grive-tools/grive-indicator
 exec dropbox start
 exec pulseaudio --start
+exec xrandr --output $OUTPUT_E --auto --above $OUTPUT_I
 
 ## Workspaces
 #workspace_auto_back_and_forth yes
