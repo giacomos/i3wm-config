@@ -323,7 +323,6 @@ exec --no-startup-id pidgin
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id thunderbird
 #exec --no-startup-id sflphone-client-gnome
-exec --no-startup-id kupfer
 exec --no-startup-id /opt/thefanclub/grive-tools/grive-indicator
 exec dropbox start
 exec pulseaudio --start
