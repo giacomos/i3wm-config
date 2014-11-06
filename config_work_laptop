@@ -5,8 +5,8 @@
 set $mod Mod4
 
 # Monitors
-exec --no-startup-id xrandr --output eDP1 --auto --left-of DP1
-exec --no-startup-id xrandr --output DP1 --primary
+exec --no-startup-id xrandr --output DP1
+exec --no-startup-id xrandr --output eDP1 --primary --auto --left-of DP1
 
 set $i3_path /home/jack/.i3
 set $pictures_folder /home/jack/Pictures
@@ -322,8 +322,6 @@ exec --no-startup-id gnome-terminal
 exec --no-startup-id pidgin
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id thunderbird
-#exec --no-startup-id sflphone-client-gnome
-exec --no-startup-id /opt/thefanclub/grive-tools/grive-indicator
 exec dropbox start
 exec pulseaudio --start
 exec xrandr --output $OUTPUT_E --auto --above $OUTPUT_I
