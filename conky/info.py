@@ -16,6 +16,10 @@ parser.add_argument('--set-brightness',
                     type=int,
                     dest='set_brightness',
                     help="set brightness")
+parser.add_argument('--get-keyboard-layout',
+                    action='store_true',
+                    dest='get_keyboard_layout',
+                    help="show keyboard layout infos")
 
 args = parser.parse_args()
 
@@ -27,7 +31,7 @@ if args.battery:
         status, percentage, eta = infos.split(', ')
         eta = eta[:8]
         status_sym = status == 'Charging' and '↗' or '↘'
-        sys.stdout.write('⚡: %s (%s %s)\n' % (percentage, status_sym, eta))
+        sys.stdout.write('%s (%s %s)\n' % (percentage, status_sym, eta))
     #retval = p.wait()
 
 elif args.get_brightness:
@@ -39,11 +43,16 @@ elif args.get_brightness:
     p = subprocess.Popen(command_max_b, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     max_b = int(p.stdout.readlines()[0].replace('\n', ''))
     percentage = current_b * 100 / max_b
-    sys.stdout.write('☀: %s%%\n' % percentage)
+    sys.stdout.write('%s%%\n' % percentage)
 elif args.set_brightness:
     new_b = int(args.set_brightness)
     command = 'pkexec /usr/lib/gnome-settings-daemon/gsd-backlight-helper --set-brightness %s'
     p = subprocess.Popen(command % new_b, shell=True,
                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+elif args.get_keyboard_layout:
+    command = 'setxkbmap -print | grep xkb_symbols | awk \'{print $4}\' | awk -F"+" \'{print $2}\''
+    p = subprocess.Popen(command, shell=True,
+                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    sys.stdout.write(p.stdout.readlines()[0])
 else:
     parser.print_help()
