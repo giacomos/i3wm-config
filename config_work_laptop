@@ -5,8 +5,8 @@
 set $mod Mod4
 
 # Monitors
-exec --no-startup-id xrandr --output DP1
-exec --no-startup-id xrandr --output eDP1 --primary --auto --left-of DP1
+exec --no-startup-id xrandr --output DP1 --primary --auto --above eDP1
+#exec --no-startup-id xrandr --output eDP1 --primary --auto --left-of DP1
 
 set $i3_path /home/jack/.i3
 set $pictures_folder /home/jack/Pictures
@@ -38,6 +38,7 @@ assign [class="^Firefox$"]      → $w1
 assign [title="^DownThemAll$"]  → $w1
 assign [title="^Print$"]        → $w1
 assign [class="terminal"]       → $w2
+assign [class="^roxterm$"]      → $w2
 assign [class="^Thunderbird$"]  → $w3
 assign [class="^Evolution$"]    → $w3
 assign [class="^Geary$"]        → $w3
@@ -91,7 +92,11 @@ bindsym $mod+Shift+y exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:Ubuntu 10
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font pango:Ubuntu 9
+#font pango:DejaVu Sans Mono 10
+#font pango:DejaVu Sans Mono, Terminus Bold Semi-Condensed 11
+font pango:Terminus 11px
 
 # next/previous workspace
 bindsym Mod1+Tab workspace next
@@ -310,6 +315,9 @@ bar {
 client.unfocused          #4c7899 #24364F #aaaaaa #2e9ef4
 client.focused          #c10101 #880404 #ffffff #00AA00
 
+# hide vertical borders adjacent to the screen edges
+hide_edge_borders both
+
 # This prevent the focus to follow mouse movements
 #focus_follows_mouse no
 
@@ -318,7 +326,7 @@ exec ~/.i3/conky/brightnesslevel.sh set 30
 exec --no-startup-id firefox
 exec --no-startup-id nm-applet
 exec --no-startup-id gnome-sound-applet
-exec --no-startup-id gnome-terminal
+exec --no-startup-id roxterm
 exec --no-startup-id pidgin
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id thunderbird
