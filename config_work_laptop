@@ -81,6 +81,7 @@ bindsym $mod+Mod1+Print exec scrot -u -e 'mv $f $pictures_folder/Scrot/$f && gim
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+Return exec gnome-terminal
 
 # rename workspace
 bindsym $mod+Shift+y exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
@@ -102,8 +103,8 @@ font pango:Terminus 11px
 bindsym Mod1+Tab workspace next
 bindsym Mod1+Shift+Tab workspace prev
 bindsym $mod+Tab workspace back_and_forth
-bindsym $mod+Ctrl+Right workspace next
-bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Mod1+Right workspace next
+bindsym $mod+Mod1+Left workspace prev
 
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -293,6 +294,7 @@ bar {
         position top
 #        status_command i3status --config ~/.i3status.conf
         status_command ~/.i3/conky/conky-i3bar
+        font pango:Terminus 8, Icons 8
 
         colors {
             background #24364F
