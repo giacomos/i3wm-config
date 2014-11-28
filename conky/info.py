@@ -47,8 +47,7 @@ if args.battery:
         name, infos = line.split(': ')
         status, percentage, eta = infos.split(', ')
         eta = eta[:8]
-        status_sym = status == 'Charging' and '↗' or '↘'
-        sys.stdout.write('%s (%s %s)\n' % (percentage, status_sym, eta))
+        sys.stdout.write('%s (%s)\n' % (percentage, eta))
     #retval = p.wait()
 
 elif args.get_brightness:
