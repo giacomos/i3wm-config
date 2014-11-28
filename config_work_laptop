@@ -298,7 +298,7 @@ bar {
 
         colors {
             background #24364F
-            statusline #CCCCCC
+            statusline #999999
 
             focused_workspace  #ffffff #285577
             active_workspace   #cccccc #333333

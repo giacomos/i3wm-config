@@ -2,8 +2,21 @@
 # -*- coding: utf-8 -*-
 import subprocess
 import sys
+import socket
+import fcntl
+import struct
 
 import argparse
+
+
+def get_ip_address(ifname):
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    return socket.inet_ntoa(fcntl.ioctl(
+        s.fileno(),
+        0x8915,  # SIOCGIFADDR
+        struct.pack('256s', ifname[:15])
+    )[20:24])
+
 parser = argparse.ArgumentParser(description='Provides some useful infos about the system.')
 
 parser.add_argument('--battery', action='store_true', help="show battery infos")
@@ -20,6 +33,10 @@ parser.add_argument('--get-keyboard-layout',
                     action='store_true',
                     dest='get_keyboard_layout',
                     help="show keyboard layout infos")
+parser.add_argument('--get-ip',
+                    action='store',
+                    dest='get_ip',
+                    help="get ip for interface")
 
 args = parser.parse_args()
 
@@ -49,6 +66,9 @@ elif args.set_brightness:
     command = 'pkexec /usr/lib/gnome-settings-daemon/gsd-backlight-helper --set-brightness %s'
     p = subprocess.Popen(command % new_b, shell=True,
                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+elif args.get_ip:
+    interface = args.get_ip
+    sys.stdout.write(get_ip_address(interface))
 elif args.get_keyboard_layout:
     command = 'setxkbmap -print | grep xkb_symbols | awk \'{print $4}\' | awk -F"+" \'{print $2}\''
     p = subprocess.Popen(command, shell=True,
