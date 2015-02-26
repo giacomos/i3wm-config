@@ -2,20 +2,20 @@
 # -*- coding: utf-8 -*-
 import subprocess
 import sys
-import socket
-import fcntl
-import struct
-
+import NetworkManager as nm
 import argparse
 
 
 def get_ip_address(ifname):
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    return socket.inet_ntoa(fcntl.ioctl(
-        s.fileno(),
-        0x8915,  # SIOCGIFADDR
-        struct.pack('256s', ifname[:15])
-    )[20:24])
+    for dev in nm.NetworkManager.GetDevices():
+        if dev.Interface == ifname:
+            if dev.State == 20:
+                return '<hw Disabled>'
+            elif dev.State == 30:
+                return '<not connected>'
+            else:
+                return dev.Ip4Address
+    return '<not found>'
 
 parser = argparse.ArgumentParser(description='Provides some useful infos about the system.')
 
