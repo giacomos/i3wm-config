@@ -31,5 +31,7 @@ export TERMINAL='gnome-terminal'
 
 # exec xrandr --output DP1 --primary
 # Launch i3 window manager
+eval $(dbus-launch --sh-syntax)
+export XDG_CURRENT_DESKTOP=GNOME
 exec i3
 

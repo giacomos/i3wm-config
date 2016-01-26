@@ -37,6 +37,10 @@ parser.add_argument('--get-ip',
                     action='store',
                     dest='get_ip',
                     help="get ip for interface")
+parser.add_argument('--get-volume',
+                    action='store_true',
+                    dest='get_volume',
+                    help="get source volume")
 
 args = parser.parse_args()
 
@@ -73,5 +77,9 @@ elif args.get_keyboard_layout:
     p = subprocess.Popen(command, shell=True,
                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     sys.stdout.write(p.stdout.readlines()[0])
+elif args.get_volume:
+    import alsaaudio
+    m = alsaaudio.Mixer(control='IEC958', id=0)   # defined alsaaudio.Mixer to change volume
+    sys.stdout.write(m.getvolume())
 else:
     parser.print_help()

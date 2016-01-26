@@ -4,20 +4,17 @@
 
 set $mod Mod4
 
-# Monitors
-exec --no-startup-id xrandr --output DP1 --primary --auto --above eDP1
-#exec --no-startup-id xrandr --output eDP1 --primary --auto --left-of DP1
+set $OUTPUT_E HDMI2
+set $OUTPUT_I eDP1
 
 set $i3_path /home/jack/.i3
 set $pictures_folder /home/jack/Pictures
 
-set $OUTPUT_E DP1
-set $OUTPUT_I eDP1
-
 # Fancy names for workspaces
 set $w1 1: WWW
 set $w2 2: TERM
-set $w3 3: MAIL
+# set $w3 3: MAIL
+set $w3 3: HIPCHAT
 set $w4 4: CHAT
 set $w5 5: FILE
 set $w6 6
@@ -27,7 +24,7 @@ set $w9 9
 set $w10 10
 
 ## my custom binds
-bindsym $mod+Ctrl+l exec i3lock -c 000000 -i $pictures_folder/wallpaper.png -t # && sudo pm-suspend
+bindsym $mod+Ctrl+l exec xset dpms force off && i3lock -c 000000
 #bindsym $mod+Ctrl+l exec --no-startup-id $i3_path/i3exit lock, mode "default"
 bindsym $mod+b exec nautilus --no-desktop &
 bindsym $mod+Shift+B exec i3-input -F 'exec ~/.i3/conky/brightnesslevel.sh set %s' -P 'Set brightness to: '
@@ -39,7 +36,8 @@ assign [title="^DownThemAll$"]  → $w1
 assign [title="^Print$"]        → $w1
 assign [class="terminal"]       → $w2
 assign [class="^Roxterm$"]      → $w2
-assign [class="^Thunderbird$"]  → $w3
+# assign [class="^Thunderbird$"]  → $w3
+# assign [class="^HipChat$"]      → $w3
 assign [class="^Evolution$"]    → $w3
 assign [class="^Geary$"]        → $w3
 assign [title="SFLphone"]       → $w4
@@ -51,6 +49,7 @@ assign [class="^Nautilus$"]     → $w5
 for_window [window_role="pop-up"] floating enable
 for_window [class="^Skype$"] floating enable
 for_window [class="notify"] floating enable border 1pixel
+for_window [class="update-manager"] floating enable border 1pixel
 for_window [title="GADMIN"] floating enable
 for_window [title="Calculator"] floating enable
 for_window [title="Calculator"] border 1pixel
@@ -58,17 +57,21 @@ for_window [title="Kupfer"] floating enable border 1pixel
 #for_window [class="terminal"] border 1pixel
 #for_window [class="^Thunderbird$"] move workspace $w4
 for_window [title="Pidgin"] move left; resize shrink right 31px or 31 ppt
+for_window [class="gnome-panel"] move to output $OUTPUT_E
 
 # summon most used apps
 bindsym $mod+F1 [class="Firefox"]       move workspace current
 bindsym $mod+F2 [class="terminal"]      move workspace current
-bindsym $mod+F3 [class="Thunderbird"]   move workspace current
+# bindsym $mod+F3 [class="Thunderbird"]   move workspace current
 
 # Get me to the next open VIM instance
 #bindsym Ctrl+grave [class="terminal"] focus
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
+
+# make the current window sticky
+bindsym $mod+Shift+t sticky toggle
 
 # Show the first scratchpad window
 bindsym Ctrl+grave scratchpad show
@@ -96,8 +99,8 @@ bindsym $mod+Shift+y exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 #font pango:Ubuntu 9
 #font pango:DejaVu Sans Mono 10
-#font pango:DejaVu Sans Mono, Terminus Bold Semi-Condensed 11
-font pango:Orbitron 8
+#font pango:DejaVu Sans Mono, Terminus Semi-Condensed 8
+font pango:Orbitron 9
 
 # next/previous workspace
 bindsym Mod1+Tab workspace next
@@ -130,7 +133,7 @@ bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installebindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="/usr/bin/dmenu -l 5 -fn 'xft:Terminus:pixelsize=8' -nb '#191919' -nf '#9ac0cd' -sb '#191919' -sf '#bf3f34' -p 'search app >> '"
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="/usr/bin/dmenu -b -fn 'xft:Terminus:pixelsize=8' -nb '#191919' -nf '#9ac0cd' -sb '#191919' -sf '#bf3f34' -p 'search app >> '"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="/usr/bin/dmenu -b -fn 'xft:Terminus:pixelsize=16' -nb '#191919' -nf '#9ac0cd' -sb '#191919' -sf '#bf3f34' -p 'search app >> '"
 
 # change focus
 bindsym $mod+j focus left
@@ -169,7 +172,7 @@ bindsym $mod+f fullscreen
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -290,11 +293,12 @@ bindsym $mod+Mod1+m mode "$mode_screen"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        tray_output primary
+        # tray_output primary
         position top
 #        status_command i3status --config ~/.i3status.conf
         status_command ~/.i3/conky/conky-i3bar
-        font pango:Orbitron 8
+        # status_command i3blocks
+#        font pango:Orbitron 8
 
         colors {
             background #24364F
@@ -326,15 +330,19 @@ hide_edge_borders both
 ## Autostart section
 exec ~/.i3/conky/brightnesslevel.sh set 30
 exec --no-startup-id firefox
-exec --no-startup-id nm-applet
+#exec --no-startup-id nm-applet
 exec --no-startup-id gnome-sound-applet
 exec --no-startup-id roxterm
 exec --no-startup-id pidgin
 exec --no-startup-id gnome-settings-daemon
-exec --no-startup-id thunderbird
+# exec --no-startup-id thunderbird
+exec --no-startup-id hipchat
+exec --no-startup-id xbindkeys
+exec --no-startup-id parcellite
+exec --no-startup-id gnome-clocks
 exec dropbox start
 exec pulseaudio --start
-exec xrandr --output $OUTPUT_E --auto --above $OUTPUT_I
+exec xrandr --output $OUTPUT_E --auto --right-of $OUTPUT_I
 
 ## Workspaces
 #workspace_auto_back_and_forth yes
@@ -342,3 +350,5 @@ workspace "$w1" output $OUTPUT_E
 workspace "$w2" output $OUTPUT_E
 workspace "$w3" output $OUTPUT_E
 workspace "$w4" output $OUTPUT_I
+
+exec echo “.i3/config: DESKTOP_AUTOSTART_ID $DESKTOP_AUTOSTART_ID, registering with org.gnome.SessionManager”
