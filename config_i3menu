@@ -2,9 +2,14 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+smart_gaps on
+gaps inner 10
+# gaps outer 10
+smart_borders on
+
 set $mod Mod4
 
-set $OUTPUT_E HDMI1
+set $OUTPUT_E HDMI2
 set $OUTPUT_I eDP1
 
 set $i3_path ~/.i3
@@ -47,15 +52,17 @@ assign [class="^Nautilus$"]     → $w5
 
 #for_window [class="Guake"] floating enable
 for_window [window_role="pop-up"] floating enable
-#for_window [class="^Skype$"] floating enable
+for_window [window_role="prefwindow"] floating enable
+for_window [class="^Skype$"] floating enable
 for_window [class="notify"] floating enable border 1pixel
 for_window [class="update-manager"] floating enable border 1pixel
-for_window [title="Calculator"] floating enable
-for_window [title="Calculator"] border 1pixel
+# for_window [class="gnome-calculator"] floating enable border 1pixel resize 640 480
 for_window [title="Kupfer"] floating enable border 1pixel
 #for_window [class="terminal"] border 1pixel
 for_window [title="Pidgin"] move left; resize shrink right 31px or 31 ppt
 for_window [class="gnome-panel"] move to output $OUTPUT_E
+for_window [class="vlc"] floating enable
+for_window [class="^Roxterm$"] border 1pixel
 
 # summon most used apps
 bindsym $mod+F1 [class="Firefox"]       move workspace current
@@ -67,7 +74,11 @@ bindsym $mod+F2 [class="terminal"]      move workspace current
 # Show the first scratchpad window
 bindsym Ctrl+grave scratchpad show
 
+# The middle button over a titlebar kills the window
+bindsym --release button2 kill
+
 # Screen Shots
+bindsym --release $mod+x exec --no-startup-id import /tmp/latest-screenshot.png
 bindsym Print exec scrot -e 'mv $f $pictures_folder/Scrot/$f'
 bindsym Mod1+Print exec scrot -u -e 'mv $f $pictures_folder/Scrot/$f'
 bindsym $mod+Print exec scrot
@@ -119,6 +130,7 @@ bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
 bindsym $mod+space    exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -i -dmenu -p "run:"'
 bindsym $mod+g        exec --no-startup-id rofi -fuzzy -show window
 
+bindsym $mod+r        exec --no-startup-id i3menu root
 bindsym $mod+Shift+G  exec --no-startup-id i3menu goto_actions
 bindsym $mod+b        exec --no-startup-id i3menu bar_actions
 bindsym $mod+i        exec --no-startup-id i3menu global_actions
@@ -191,7 +203,7 @@ bindsym $mod+Shift+r restart
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
+bindsym $mod+Mod1+R mode "i3menu"
         # Pressing left will shrink the window’s width.
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
@@ -211,28 +223,36 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
+bindsym $mod+Mod1+R mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        # tray_output primary
-        position top
-#        status_command i3status --config ~/.i3status.conf
-#        status_command $i3_path/conky/conky-i3bar
-        status_command i3blocks
-#        font pango:Orbitron 8
+    id bar-0
+    # tray_output primary
+    position top
+    status_command $i3_path/conky/conky-i3bar
 
-        colors {
-            background #24364F
-            statusline #CCCCCC
+    colors {
+        background #24364F
+        statusline #CCCCCC
 
-            focused_workspace  #ffffff #285577
-            active_workspace   #cccccc #333333
-            inactive_workspace #999999 #222222
-            urgent_workspace   #ffffff #900000
-        }
+        focused_workspace  #ffffff #285577
+        active_workspace   #cccccc #333333
+        inactive_workspace #999999 #222222
+        urgent_workspace   #ffffff #900000
+    }
 }
+# bar {
+#     id bar-1
+#     workspace_buttons off
+#     tray_output off
+#     position top
+#     status_command $i3_path/conky/conky-i3bar
+#     colors {
+#         background #24364F
+#     }
+# }
 
 # Original windows decoration colors
 # class                 border  backgr. text    indicator
@@ -252,16 +272,19 @@ hide_edge_borders both
 
 ## Autostart section
 exec --no-startup-id firefox
-#exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 exec --no-startup-id gnome-sound-applet
 exec --no-startup-id roxterm
-exec --no-startup-id pidgin
-exec --no-startup-id gnome-settings-daemon
+exec --no-startup-id compton -b
+# exec --no-startup-id pidgin
+# exec --no-startup-id gnome-settings-daemon
 # exec --no-startup-id thunderbird
-exec --no-startup-id hipchat
+# exec --no-startup-id hipchat
 exec --no-startup-id xbindkeys
 exec --no-startup-id parcellite
-exec --no-startup-id gnome-clocks
+# exec --no-startup-id gnome-clocks
+# exec --no-startup-id xfce4-panel --disable-wm-check
+exec --no-startup-id feh --bg-scale /home/jack/Pictures/wallpaper.jpg
 
 exec dropbox start
 exec pulseaudio --start
@@ -274,4 +297,4 @@ workspace "$w2" output $OUTPUT_E
 workspace "$w3" output $OUTPUT_E
 workspace "$w4" output $OUTPUT_I
 
-exec echo “.i3/config: DESKTOP_AUTOSTART_ID $DESKTOP_AUTOSTART_ID, registering with org.gnome.SessionManager”
+# exec echo “.i3/config: DESKTOP_AUTOSTART_ID $DESKTOP_AUTOSTART_ID, registering with org.gnome.SessionManager”
