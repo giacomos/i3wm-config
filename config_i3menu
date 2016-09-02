@@ -141,8 +141,8 @@ bindsym $mod+Shift+W  exec --no-startup-id i3menu target_window_actions
 bindsym $mod+k        exec --no-startup-id i3menu workspace_actions
 bindsym $mod+Shift+K  exec --no-startup-id i3menu target_workspace_actions
 
-bindsym $mod+m        exec --no-startup-id $i3_path/scripts/monitors_layout.sh
-bindsym $mod+Shift+E  exec --no-startup-id $i3_path/scripts/rofi_power_management.sh
+bindsym $mod+m        exec --no-startup-id ~/.dotfiles/bin/monitors_layout
+bindsym $mod+Shift+E  exec --no-startup-id ~/.dotfiles/bin/rofi_power_management
 
 # change focus
 bindsym $mod+Left focus left
@@ -232,6 +232,7 @@ bar {
     # tray_output primary
     position top
     status_command $i3_path/conky/conky-i3bar
+    # i3bar_command $i3_path/lemonbar/i3_lemonbar.sh
 
     colors {
         background #24364F
@@ -271,24 +272,23 @@ hide_edge_borders both
 #focus_follows_mouse no
 
 ## Autostart section
-exec --no-startup-id firefox
+exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id nm-applet
 exec --no-startup-id gnome-sound-applet
 exec --no-startup-id roxterm
 exec --no-startup-id compton -b
-# exec --no-startup-id pidgin
-# exec --no-startup-id gnome-settings-daemon
-# exec --no-startup-id thunderbird
-# exec --no-startup-id hipchat
 exec --no-startup-id xbindkeys
+exec --no-startup-id firefox
+
+# The lightweight GTK+ clipboard manager.
 exec --no-startup-id parcellite
 # exec --no-startup-id gnome-clocks
 # exec --no-startup-id xfce4-panel --disable-wm-check
 exec --no-startup-id feh --bg-scale /home/jack/Pictures/wallpaper.jpg
 
-exec dropbox start
-exec pulseaudio --start
-exec xrandr --output $OUTPUT_E --auto --right-of $OUTPUT_I
+exec --no-startup-id dropbox start
+exec --no-startup-id pulseaudio --start
+exec --no-startup-id xrandr --output $OUTPUT_E --auto --right-of $OUTPUT_I
 
 ## Workspaces
 #workspace_auto_back_and_forth yes
