@@ -86,6 +86,11 @@ ${endif}
 # {
 #     "full_text": "${exec whoami}@${nodename} "
 # },
+${if_up vpn0}
+{
+    "full_text": "  ${addr vpn0}",
+    "color": "\#00FF00"
+},
 ${if_up tun0}
 {
     "full_text": "  ${addr tun0}",

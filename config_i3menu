@@ -34,7 +34,8 @@ workspace_layout tabbed
 ## my custom binds
 bindsym $mod+Ctrl+l exec xset dpms force off && i3lock -c 000000
 #bindsym $mod+Ctrl+l exec --no-startup-id $i3_path/i3exit lock, mode "default"
-bindsym $mod+n exec nautilus --no-desktop &
+#bindsym $mod+n exec nautilus --no-desktop &
+bindsym $mod+n exec thunar
 bindsym $mod+Shift+B exec i3-input -F 'exec $i3_path/conky/brightnesslevel.sh set %s' -P 'Set brightness to: '
 bindsym Mod1+Shift+K exec i3-input -F 'exec setxkbmap %s' -P 'Set keyboard layout to: '
 
@@ -49,6 +50,10 @@ assign [class="^Evolution$"]    → $w3
 assign [class="Buddy List"]     → $w4
 assign [class="Pidgin"]         → $w4
 assign [class="^Nautilus$"]     → $w5
+assign [class="^Thunar$"]       → $w5
+assign [class="^Surf$"]         → $w1
+assign [instance="^Weechat"]        → $w3
+assign [class="^Google-chrome$"]      → $w1
 
 #for_window [class="Guake"] floating enable
 for_window [window_role="pop-up"] floating enable
@@ -164,6 +169,7 @@ bindsym $mod+v split v
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+f floating toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -229,7 +235,7 @@ bindsym $mod+Mod1+R mode "resize"
 # finds out, if available)
 bar {
     id bar-0
-    # tray_output primary
+    tray_output none
     position top
     status_command $i3_path/conky/conky-i3bar
     # i3bar_command $i3_path/lemonbar/i3_lemonbar.sh
@@ -249,9 +255,15 @@ bar {
 #     workspace_buttons off
 #     tray_output off
 #     position top
-#     status_command $i3_path/conky/conky-i3bar
+#     status_command $i3_path/conky/conky-i3bar-networks
 #     colors {
 #         background #24364F
+#         statusline #CCCCCC
+#
+#         focused_workspace  #ffffff #285577
+#         active_workspace   #cccccc #333333
+#         inactive_workspace #999999 #222222
+#         urgent_workspace   #ffffff #900000
 #     }
 # }
 
@@ -272,23 +284,28 @@ hide_edge_borders both
 #focus_follows_mouse no
 
 ## Autostart section
-exec --no-startup-id gnome-settings-daemon
+# exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id nm-applet
-exec --no-startup-id gnome-sound-applet
+# exec --no-startup-id gnome-sound-applet
 exec --no-startup-id roxterm
 exec --no-startup-id compton -b
 exec --no-startup-id xbindkeys
-exec --no-startup-id firefox
+# exec --no-startup-id firefox
 
 # The lightweight GTK+ clipboard manager.
-exec --no-startup-id parcellite
-# exec --no-startup-id gnome-clocks
-# exec --no-startup-id xfce4-panel --disable-wm-check
 exec --no-startup-id feh --bg-scale /home/jack/Pictures/wallpaper.jpg
 
-exec --no-startup-id dropbox start
+# exec --no-startup-id dropbox start
+exec --no-startup-id dropbox stop && DBUS_SESSION_BUS_ADDRESS="" dropbox start
 exec --no-startup-id pulseaudio --start
 exec --no-startup-id xrandr --output $OUTPUT_E --auto --right-of $OUTPUT_I
+
+# set $USER_AGENT AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143
+# # rancher
+# exec --no-startup-id "sleep 30;surf http://localhost:8888"
+# # gmail
+# exec --no-startup-id "sleep 45;surf -u '$USER_AGENT' https://mail.google.com"
+
 
 ## Workspaces
 #workspace_auto_back_and_forth yes
@@ -296,5 +313,3 @@ workspace "$w1" output $OUTPUT_E
 workspace "$w2" output $OUTPUT_E
 workspace "$w3" output $OUTPUT_E
 workspace "$w4" output $OUTPUT_I
-
-# exec echo “.i3/config: DESKTOP_AUTOSTART_ID $DESKTOP_AUTOSTART_ID, registering with org.gnome.SessionManager”
