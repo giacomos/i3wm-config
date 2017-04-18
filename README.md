@@ -18,7 +18,7 @@
 * setxkbmap - setting keyboard layout
 
 
-##Installation
+## Installation
 It's as simple as that:
 
 ```bash
